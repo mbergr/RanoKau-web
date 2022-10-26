@@ -1,0 +1,255 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block breadcrumb %}
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">Projects</li>
+        <li class="breadcrumb-item active">New Project</li>
+{% endblock breadcrumb%}
+
+
+
+
+
+{% block content %}
+<div class="container animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card-group">
+                    <div class="card p-4 mb-5">
+                        <div class="card-body">
+                            {% if created %}
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  Felicitaciones, tu proyecto fue creado!
+                              </div>
+                            {% endif %}
+                                {% csrf_token %}
+                                <h1>Rano Project</h1>
+                                <p class="text-muted">Crea tu proyecto de cultivo  aca</p>
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+
+                                        {{ form.name }}
+                                        {% if form.name.errors %}
+                                            <ol>
+                                            {% for error in form.name.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                                                <div class="form-group">
+                                    <label class="col-form-label">Tipo de Cultivo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                        {{ form.plant_type }}
+                                        {% if form.plant_type.errors %}
+                                            <ol>
+                                            {% for error in form.plant_type.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                                                <div class="form-group">
+                                    <label class="col-form-label">Numero de plantas</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                        {{ form.num_plants }}
+                                        {% if form.num_plants.errors %}
+                                            <ol>
+                                            {% for error in form.num_plants.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                                                                                <div class="form-group">
+                                    <label class="col-form-label">Area de Cultivo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                        {{ form.area }}
+                                        {% if form.area.errors %}
+                                            <ol>
+                                            {% for error in form.area.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                       <div class="form-group">
+                                    <label class="col-form-label">Asigna los participantes del proyecto. <i>Crtl+click for multiple selection</i></label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-users"></i></span>
+                                        </div>
+                                        {{ form.assign }}
+                                        {% if form.assign.errors %}
+                                            <ol>
+                                            {% for error in form.assign.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-calculator"></i></span>
+                                        </div>
+                                        {{ form.efforts }}
+                                        {% if form.efforts.errors %}
+                                            <ol>
+                                            {% for error in form.efforts.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Estado</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                        {{ form.status }}
+                                        {% if form.status.errors %}
+                                            <ol>
+                                            {% for error in form.status.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Dead Line</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
+                                        </div>
+                                        {{ form.dead_line }}
+                                    </div>
+
+                                    {% if form.dead_line.errors %}
+                                            <ol>
+                                            {% for error in form.dead_line.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Compañia</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-industry"></i></span>
+                                        </div>
+                                        {{ form.company }}
+                                    </div>
+
+                                    {% if form.company.errors %}
+                                            <ol>
+                                            {% for error in form.company.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                        </div>
+                                        {{ form.complete_per }}
+                                    </div>
+
+                                    {% if form.complete_per.errors %}
+                                            <ol>
+                                            {% for error in form.complete_per.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-form-label">Descripcion</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-quote-left"></i></span>
+                                        </div>
+                                        {{ form.description }}
+                                    </div>
+
+                                    {% if form.description.errors %}
+                                            <ol>
+                                            {% for error in form.description.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                </div>
+                                                                                                                           <div class="form-group">
+                                <div class="form-group">
+                                    <label class="col-form-label">Ubicacion</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                        </div>
+                                        {{form.address}}
+                                                                            {% if form.address.errors %}
+                                            <ol>
+                                            {% for error in form.address.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                        <button class="btn btn-outline-success my-2 my-sm-0 mx-3" type="submit">Buscar</button>
+                                    </div>
+                                   <div class="container">
+                                        <div class="row mt-4">
+                                            <div class="col-md-10 offset-md-1">
+                                                {{ m|safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                                    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                                </div>
+                            </form>
+                            {{ form.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
