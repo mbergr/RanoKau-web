@@ -21,16 +21,15 @@
       </div>
       <div class="card-body">
         <div class="jumbotron bg-white">
-          <h1 class="display-4">Hello, world!</h1>
-          <p class="lead">Welcome to the Project Manager System.</p>
+          <h1 class="display-4">Bienvenido a RanoKau Agrotech!</h1>
+          <p class="lead">Pagina creada como administrador de proyectos.</p>
           <hr class="my-4">
-          <p>Register your company and start managing your projects</p>
-          <p>That's it, simple, easy, fast.</p>
+          <p>Registra tu proyecto/empresa para comenzar</p>
           <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{% url 'register:new-company' %}" role="button">Set up your company</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'register:new-company' %}" role="button">Registra tu proyecto!</a>
           </p>
           {% if not user.is_authenticated %}
-          <a href="{% url 'core:login' %}">Click here if you are already registered</a>
+          <a href="{% url 'core:login' %}">Si ya estas registrado, haz click aquí</a>
           {% endif %}
         </div>
       </div>
