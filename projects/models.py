@@ -5,17 +5,17 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #from jsonfield import JSONField
 
 
-# status = (
-#     ('1', 'Stuck'),
-#     ('2', 'Working'),
-#     ('3', 'Done'),
-# )
-#
-# due = (
-#     ('1', 'On Due'),
-#     ('2', 'Overdue'),
-#     ('3', 'Done'),
-# )
+status = (
+    ('1', 'Stuck'),
+    ('2', 'Working'),
+    ('3', 'Done'),
+)
+
+due = (
+    ('1', 'On Due'),
+    ('2', 'Overdue'),
+    ('3', 'Done'),
+)
 
 # Create your models here.
 class Project(models.Model):
