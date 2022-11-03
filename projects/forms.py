@@ -10,13 +10,19 @@ status = (
     ('2', 'En proceso'),
     ('3', 'Finalizado'),
 )
+# plant_type = (
+#     ('1', 'Albaca'),
+#     ('2', 'Menta'),
+#     ('3', 'Rucula'),
+#     ('4', 'Tomate'),
+#     ('5', 'Lechuga'),
+#     ('6', 'Frutilla'),
+# )
+
 plant_type = (
     ('1', 'Albaca'),
-    ('2', 'Menta'),
-    ('3', 'Rucula'),
-    ('4', 'Tomate'),
-    ('5', 'Lechuga'),
-    ('6', 'Frutilla'),
+    ('2', 'Lechuga'),
+
 )
 
 due = (
@@ -73,16 +79,16 @@ class ProjectRegistrationForm(forms.ModelForm):
     name = forms.CharField(max_length=80)
     # slug = forms.SlugField('shortcut')
     assign = forms.ModelMultipleChoiceField(queryset=User.objects.all())
-    efforts = forms.DurationField()
+    #efforts = forms.DurationField()
     status = forms.ChoiceField(choices=status)
     plant_type= forms.ChoiceField(choices=plant_type)
     num_plants=forms.IntegerField(min_value=0 , max_value=1000)
     address = forms.CharField(max_length=150,label='')
     #quality = forms.JSONField()
-    dead_line = forms.DateField()
-    company = forms.ModelChoiceField(queryset=Company.objects.all())
-    complete_per = forms.FloatField(min_value=0, max_value=100)
-    description = forms.CharField(widget=forms.Textarea)
+    #dead_line = forms.DateField()
+    #company = forms.ModelChoiceField(queryset=Company.objects.all())
+    #complete_per = forms.FloatField(min_value=0, max_value=100)
+    #description = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = Project
@@ -93,15 +99,15 @@ class ProjectRegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         Project = super(ProjectRegistrationForm, self).save(commit=False)
         Project.name = self.cleaned_data['name']
-        Project.efforts = self.cleaned_data['efforts']
+        #Project.efforts = self.cleaned_data['efforts']
         Project.status = self.cleaned_data['status']
-        Project.dead_line = self.cleaned_data['dead_line']
-        Project.company = self.cleaned_data['company']
+        #Project.dead_line = self.cleaned_data['dead_line']
+        #Project.company = self.cleaned_data['company']
         Project.plant_type = self.cleaned_data['plant_type']
         Project.num_plants = self.cleaned_data['num_plants']
         #Project.quality = self.cleaned_data['quality']
-        Project.complete_per = self.cleaned_data['complete_per']
-        Project.description = self.cleaned_data['description']
+        #Project.complete_per = self.cleaned_data['complete_per']
+        #Project.description = self.cleaned_data['description']
         Project.address = self.cleaned_data['address']
         Project.slug = slugify(str(self.cleaned_data['name']))
         Project.save()
@@ -119,27 +125,27 @@ class ProjectRegistrationForm(forms.ModelForm):
         super(ProjectRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = 'form-control'
         self.fields['name'].widget.attrs['placeholder'] = 'Nombre del Proyecto'
-        self.fields['efforts'].widget.attrs['class'] = 'form-control'
-        self.fields['efforts'].widget.attrs['placeholder'] = 'Efforts'
-        self.fields['status'].widget.attrs['class'] = 'form-control'
-        self.fields['status'].widget.attrs['placeholder'] = 'Estado'
-        self.fields['dead_line'].widget.attrs['class'] = 'form-control'
-        self.fields['dead_line'].widget.attrs['placeholder'] = 'Dead Line, escribe una fecha'
+        #self.fields['efforts'].widget.attrs['class'] = 'form-control'
+        #self.fields['efforts'].widget.attrs['placeholder'] = 'Efforts'
+        #self.fields['status'].widget.attrs['class'] = 'form-control'
+        #self.fields['status'].widget.attrs['placeholder'] = 'Estado'
+        #self.fields['dead_line'].widget.attrs['class'] = 'form-control'
+        #self.fields['dead_line'].widget.attrs['placeholder'] = 'Dead Line, escribe una fecha'
         self.fields['plant_type'].widget.attrs['class'] = 'form-control'
         self.fields['plant_type'].widget.attrs['placeholder'] = 'Tipo de cultivo'
         self.fields['num_plants'].widget.attrs['class'] = 'form-control'
         self.fields['num_plants'].widget.attrs['placeholder'] = 'Cantidad'
         #self.fields['quality'].widget.attrs['class'] = 'form-control'
         #self.fields['quality'].widget.attrs['placeholder'] = 'Caracteristicas objetivo'
-        self.fields['company'].widget.attrs['class'] = 'form-control'
-        self.fields['company'].widget.attrs['placeholder'] = 'Compañia'
-        self.fields['complete_per'].widget.attrs['class'] = 'form-control'
-        self.fields['complete_per'].widget.attrs['placeholder'] = 'Completado %'
+        #self.fields['company'].widget.attrs['class'] = 'form-control'
+        #self.fields['company'].widget.attrs['placeholder'] = 'Compañia'
+        #self.fields['complete_per'].widget.attrs['class'] = 'form-control'
+        #self.fields['complete_per'].widget.attrs['placeholder'] = 'Completado %'
         self.fields['address'].widget.attrs['class'] = 'form-control'
         self.fields['address'].widget.attrs['placeholder'] = 'direccion'
-        self.fields['description'].widget.attrs['class'] = 'form-control'
-        self.fields['description'].widget.attrs['placeholder'] = 'Escribe aca la descripcion de esta ronda de cultivo...'
-        self.fields['assign'].widget.attrs['class'] = 'form-control'
+        #self.fields['description'].widget.attrs['class'] = 'form-control'
+        #self.fields['description'].widget.attrs['placeholder'] = 'Escribe aca la descripcion de esta ronda de cultivo...'
+        #self.fields['assign'].widget.attrs['class'] = 'form-control'
 
     def get_address(self):
         return self.cleaned_data['address']
