@@ -5,10 +5,13 @@ from .models import Task
 # Register your models here.
 
 class ProjectAdmin(admin.ModelAdmin):
-    raw_id_fields = ('company',)
-    list_display = ['name', 'company', ]
-    list_filter = ['name', 'company', ]
-    search_fields = ['name', 'company', 'status',]
+    #raw_id_fields = ('company',)
+    # list_display = ['name', 'company', ]
+    # list_filter = ['name', 'company', ]
+    # search_fields = ['name', 'company', 'status',]
+    list_display = ['name', ]
+    list_filter = ['name', ]
+    search_fields = ['name', 'status',]
     prepopulated_fields = {'slug':('name',)}
 
     class Meta:
