@@ -1,10 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-<!--
-{% block breadcrumb %}
-<li class="breadcrumb-item active">Casa</li>
-{% endblock breadcrumb%}
--->
+
 {% block content %}
 <div class="container-fluid">
   <div id="ui-view" style="opacity: 1;"><div class="animated fadeIn">
@@ -23,8 +19,9 @@
       </div>
       <div class="card-body">
         <div class="jumbotron bg-white">
+          <img src="{% static 'core/img/logos/rano_horizontal.jpeg' %}" alt="" class="brand-gui ml-2 d-none d-sm-block p-2" style="width:30%;height:100%;">
           <h1 class="display-4">Bienvenido a RanoKau Agrotech!</h1>
-          <p class="lead">Pagina creada como administrador de proyectos.</p>
+          <p class="lead">Crea un proyecto para comenzar.</p>
           <hr class="my-4">
           <!--<p>Registra tu proyecto/empresa para comenzar</p>-->
           <p class="lead">
