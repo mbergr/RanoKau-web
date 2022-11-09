@@ -11,6 +11,7 @@ from register.models import Company
 from register.models import Project
 from register.models import UserProfile
 from projects.models import Task
+import folium
 
 # Create your views here.
 def index(request):
@@ -84,3 +85,11 @@ def context(request): # send context to base.html
             'users_prof': users_prof,
         }
         return context
+
+
+def mapa_view(request):
+    #create Map object
+    m=folium.Map()
+    m=m._repr_html_()
+    context = {'m':m,}
+    return render(request, 'core/map.html', context)

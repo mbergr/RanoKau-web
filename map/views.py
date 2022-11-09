@@ -9,13 +9,15 @@ import geocoder
 
 
 def map(request):
+    """
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = SearchForm()
+        """
+    form = SearchForm()
     address = Search.objects.all().last()
     location = geocoder.osm(address)
     lat = location.lat
