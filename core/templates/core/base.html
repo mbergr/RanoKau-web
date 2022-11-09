@@ -24,7 +24,7 @@
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
   <meta name="google-site-verification" content="83fcqoPn-YTkXathQiicW-x3U2RWZh4PaPUzk91wtjY" />
-  <title>Project Manager - Gui</title>
+  <title>RanoKau Agrotech</title>
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
@@ -42,11 +42,12 @@
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <img src="{% static 'core/img/logos/gui-horizontal.png' %}" alt="" class="brand-gui ml-2 d-none d-sm-block p-2">
+    <img src="{% static 'core/img/logos/rano_horizontal.jpeg' %}" alt="" class="brand-gui ml-2 d-none d-sm-block p-2" style="width:10%;height:100%;">
+    
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <!--
     <ul class="nav navbar-nav d-md-down-none">
       <li class="nav-item px-3">
         <a class="nav-link" href="{% url 'core:index' %}">Home</a>
@@ -54,22 +55,32 @@
       <li class="nav-item px-3">
         <a class="nav-link" href="{% url 'core:dashboard' %}">Dashboard</a>
       </li>
+      -->
       <!--<li class="nav-item px-3">-->
         <!--<a class="nav-link" href="#">Settings</a>-->
       <!--</li>-->
+    <!--
     </ul>
+    -->
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-bell"></i><span class="badge badge-pill badge-danger">{{ logged_user.received_invites.count }}</span></a>
       </li>
+      <!--
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-list"></i></a>
       </li>
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-map-marker"></i></a>
       </li>
+      -->
       {% if user.is_authenticated %}
-      <li class="text-muted">Hello, {{ user.first_name }}</li>
+      <a href="{% url 'core:login' %}"> Log out &nbsp; </a>
+      <!--<li class="text-muted">Hola, {{ user.first_name }} {{ user.user.last_name }} </li>-->
+      <li class="text-muted"> Hola, {{ user.user.get_full_name }} </li>
+      <!--<li class="text-muted">-->
+
+      <!--</li>-->
       {% else %}
       <li class="text-muted">
         <a href="{% url 'core:login' %}">sign in</a>
@@ -105,6 +116,7 @@
           <a class="dropdown-item" href="{% url 'core:logout' %}"><i class="fa fa-lock"></i> Logout</a>
           {% else %}
           <a class="dropdown-item" href="{% url 'core:login' %}"><i class="fa fa-user"></i> Login</a>
+
           {% endif %}
         </div>
       </li>
@@ -146,10 +158,11 @@
           <!--<li class="nav-item">-->
             <!--<a href="typography.html" class="nav-link"><i class="fa fa-user"></i> Typograhy</a>-->
           <!--</li>-->
+          <!--
           <li class="nav-title">
             Register
           </li>
-          <!--
+          
           <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-industry"></i> Company</a>
             <ul class="nav-dropdown-items">
@@ -191,39 +204,28 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:login' %}" target="_top"><i class="fa fa-sign-in"></i> Login</a>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:logout' %}" target="_top"><i class="fa fa-sign-out"></i> Logout</a>
               </li>
+              -->
             </ul>
           </li>
-            -->
+
+
+
+
         </ul>
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
   
-    <!-- Main content -->
-    <main class="main">
-      <!-- Breadcrumb -->
-      <ol class="breadcrumb">
-        {% block breadcrumb %}
-        <li class="breadcrumb-item active">Home</li>
-        <li class="breadcrumb-item">Dashboard</li>
-        {% endblock breadcrumb%}
 
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-menu d-md-down-none">
-          <div class="btn-group" role="group" aria-label="Button group">
-            <a class="btn" href="#"><i class="fa fa-comments"></i></a>
-            <a class="btn" href="./"><i class="fa fa-tachometer-alt"></i> &nbsp;Dashboard</a>
-            <a class="btn" href="#"><i class="fa fa-cog"></i> &nbsp;Settings</a>
-          </div>
-        </li>
-      </ol>
+    <main class="main">
+      
 {% block content %}
 {% endblock %}
     </main>
-
     <aside class="aside-menu">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -236,7 +238,6 @@
           <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-cog"></i></a>
         </li>
       </ul>
-
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="timeline" role="tabpanel">
@@ -260,7 +261,7 @@
             </div>
               {% if user.user.last_login %}
               <small class="text-muted mr-3">Last login: {{ user.user.last_login|date:"H:i" }} in {{ user.user.last_login|date:"d/m" }}</small>
-              {% else %}
+            {% else %}
               <small class="text-muted mr-3">Never logged in</small>
               {% endif %}
             <small class="text-muted text-truncate"><i class="fa fa-industry"></i> {{ user.company }}</small>
@@ -277,7 +278,7 @@
             <div>
               <strong></strong></div>
 
-            <small class="text-muted text-truncate">Log in to see your Friends Suggested List</small>
+            <small class="text-muted text-truncate">Log in para ver a tus amigos sugeridos</small>
             <a href="{% url 'core:login' %}" class="badge badge-success text-white">Log in</a>
           </div>
           {% endif %}
@@ -397,7 +398,7 @@
   </div>
 
   <footer class="app-footer">
-    <span><a href="http://coreui.io">Copyright</a> © 2018 | Python Developed by RanoKau.</span>
+    <span>RanoKau 2022</span>
     <!--<span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>-->
   </footer>
 
