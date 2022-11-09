@@ -50,6 +50,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('core:index'))
+    #return render(request, 'register/login.html', {'login_form': form})
 
 
 def context(request): # send context to base.html

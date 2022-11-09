@@ -66,14 +66,21 @@
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-bell"></i><span class="badge badge-pill badge-danger">{{ logged_user.received_invites.count }}</span></a>
       </li>
+      <!--
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-list"></i></a>
       </li>
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-map-marker"></i></a>
       </li>
+      -->
       {% if user.is_authenticated %}
-      <li class="text-muted">Hola, {{ user.first_name }}</li>
+      <a href="{% url 'core:login' %}"> Log out &nbsp; </a>
+      <!--<li class="text-muted">Hola, {{ user.first_name }} {{ user.user.last_name }} </li>-->
+      <li class="text-muted"> Hola, {{ user.user.get_full_name }} </li>
+      <!--<li class="text-muted">-->
+
+      <!--</li>-->
       {% else %}
       <li class="text-muted">
         <a href="{% url 'core:login' %}">sign in</a>
@@ -109,6 +116,7 @@
           <a class="dropdown-item" href="{% url 'core:logout' %}"><i class="fa fa-lock"></i> Logout</a>
           {% else %}
           <a class="dropdown-item" href="{% url 'core:login' %}"><i class="fa fa-user"></i> Login</a>
+
           {% endif %}
         </div>
       </li>
@@ -196,12 +204,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:login' %}" target="_top"><i class="fa fa-sign-in"></i> Login</a>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:logout' %}" target="_top"><i class="fa fa-sign-out"></i> Logout</a>
               </li>
+              -->
             </ul>
           </li>
-            -->
+
+
 
 
         </ul>
@@ -209,13 +220,12 @@
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
   
-    <!-- Main content -->
+
     <main class="main">
       
 {% block content %}
 {% endblock %}
     </main>
-
     <aside class="aside-menu">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -228,7 +238,6 @@
           <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-cog"></i></a>
         </li>
       </ul>
-
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="timeline" role="tabpanel">
@@ -252,7 +261,7 @@
             </div>
               {% if user.user.last_login %}
               <small class="text-muted mr-3">Last login: {{ user.user.last_login|date:"H:i" }} in {{ user.user.last_login|date:"d/m" }}</small>
-              {% else %}
+            {% else %}
               <small class="text-muted mr-3">Never logged in</small>
               {% endif %}
             <small class="text-muted text-truncate"><i class="fa fa-industry"></i> {{ user.company }}</small>
@@ -269,7 +278,7 @@
             <div>
               <strong></strong></div>
 
-            <small class="text-muted text-truncate">Log in to see your Friends Suggested List</small>
+            <small class="text-muted text-truncate">Log in para ver a tus amigos sugeridos</small>
             <a href="{% url 'core:login' %}" class="badge badge-success text-white">Log in</a>
           </div>
           {% endif %}
