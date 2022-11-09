@@ -48,7 +48,7 @@ class TaskRegistrationForm(forms.ModelForm):
         task = super(TaskRegistrationForm, self).save(commit=False)
         task.project = self.cleaned_data['project']
         task.task_name = self.cleaned_data['task_name']
-        task.status = self.cleaned_data['status']
+        #task.status = self.cleaned_data['status']
         task.due = self.cleaned_data['due']
         task.save()
         assigns = self.cleaned_data['assign']
@@ -67,8 +67,8 @@ class TaskRegistrationForm(forms.ModelForm):
         self.fields['project'].widget.attrs['placeholder'] = 'Social Name'
         self.fields['task_name'].widget.attrs['class'] = 'form-control'
         self.fields['task_name'].widget.attrs['placeholder'] = 'Name'
-        self.fields['status'].widget.attrs['class'] = 'form-control'
-        self.fields['status'].widget.attrs['placeholder'] = 'Email'
+        #self.fields['status'].widget.attrs['class'] = 'form-control'
+        #self.fields['status'].widget.attrs['placeholder'] = 'Email'
         self.fields['due'].widget.attrs['class'] = 'form-control'
         self.fields['due'].widget.attrs['placeholder'] = 'City'
         self.fields['assign'].widget.attrs['class'] = 'form-control'
@@ -80,7 +80,7 @@ class ProjectRegistrationForm(forms.ModelForm):
     # slug = forms.SlugField('shortcut')
     assign = forms.ModelMultipleChoiceField(queryset=User.objects.all())
     #efforts = forms.DurationField()
-    status = forms.ChoiceField(choices=status)
+    #status = forms.ChoiceField(choices=status)
     plant_type= forms.ChoiceField(choices=plant_type)
     num_plants=forms.IntegerField(min_value=0 , max_value=1000)
     address = forms.CharField(max_length=150,label='')
@@ -100,7 +100,7 @@ class ProjectRegistrationForm(forms.ModelForm):
         Project = super(ProjectRegistrationForm, self).save(commit=False)
         Project.name = self.cleaned_data['name']
         #Project.efforts = self.cleaned_data['efforts']
-        Project.status = self.cleaned_data['status']
+        #Project.status = self.cleaned_data['status']
         #Project.dead_line = self.cleaned_data['dead_line']
         #Project.company = self.cleaned_data['company']
         Project.plant_type = self.cleaned_data['plant_type']

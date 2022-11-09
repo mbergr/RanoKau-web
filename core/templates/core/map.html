@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!--mapa prueba-->
+<div class="container">
+    <div class="row mt-4">
+      <div class="col-md-10 offset-md-1">
+        <h3>Soy el mapa!</h3>
+          {{m|safe}}
+      </div>
+  
+    </div>
+  
+  </div>
+  <!--fin mapa prueba-->
+  {% endblock %}
