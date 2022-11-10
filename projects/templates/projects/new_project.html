@@ -49,7 +49,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                                                <div class="form-group">
+                                <div class="form-group">
                                     <label class="col-form-label">Tipo de Cultivo</label>
                                     <div class="input-group">
                                         <div class="input-group-append">
@@ -65,7 +65,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                                                <div class="form-group">
+                                <div class="form-group">
                                     <label class="col-form-label">Numero de plantas</label>
                                     <div class="input-group">
                                         <div class="input-group-append">
@@ -129,20 +129,32 @@
                                             {% endfor %}
                                             </ol>
                                         {% endif %}
+                                        <!--
                                         <button class="btn btn-outline-success my-2 my-sm-0 mx-0" type="submit">Buscar</button>
+                                        </li>-->
+                                        <button  class="btn btn-outline-success my-2 my-sm-0 mx-0" type="button" onclick=myFunction("{{address}}")>Buscar</button><br>
+                                        <p id="demo"></p>
+
                                     </div>
+                                    <div  id= "mapa">
                                    <div class="container">
                                         <div class="row mt-4">
                                             <div class="col-md-10 offset-md-1">
                                                 {{ m|safe }}
                                             </div>
                                         </div>
+                                       </div>
                                     </div>
-
-
-                                   
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label class="col-form-label"> Rano Devices</label><br>
+                                           <input type="checkbox" id="device1" name="Rano Scanner" value="Rano Scanner">
+                                            <label for="device1"> Rano Scanner </label><br>
+                                           <input type="checkbox" id="device2" name="Rack Client" value="Rack Client">
+                                            <label for="device2"> Rack Client </label><br>
+                                           <input type="checkbox" id="device3" name="Environment Client" value="Environment Client">
+                                            <label for="device3"> Environment Client </label><br><br>
+                                </div>
                                 <div class="">
                                     <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Registrar</button>
                                     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Resetear</button>
@@ -155,5 +167,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function myFunction(value) {
+      document.getElementById("demo").innerHTML = value;
+   }
+</script>
 
 {% endblock %}

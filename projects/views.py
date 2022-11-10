@@ -70,6 +70,7 @@ def newProject(request):
         form = ProjectRegistrationForm()
 
     last_project=Project.objects.all().first()
+    #print(form)
     print('last project',last_project)
     if  last_project==None:
         address = "escandinavia 110"
@@ -99,8 +100,8 @@ def newProject(request):
             'm': m,
             'form': form,
             'created': created,
+            'address': address,
         }
-    #context=context['m']= m
     return render(request,'projects/new_project.html', context)
 
 
