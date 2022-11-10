@@ -83,7 +83,7 @@ class ProjectRegistrationForm(forms.ModelForm):
     #status = forms.ChoiceField(choices=status)
     plant_type= forms.ChoiceField(choices=plant_type)
     num_plants=forms.IntegerField(min_value=0 , max_value=1000)
-    address = forms.CharField(max_length=150,label='')
+    address = forms.CharField(max_length=150,label='address')
     #quality = forms.JSONField()
     #dead_line = forms.DateField()
     #company = forms.ModelChoiceField(queryset=Company.objects.all())
