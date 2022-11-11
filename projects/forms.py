@@ -124,7 +124,7 @@ class ProjectRegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProjectRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = 'form-control'
-        self.fields['name'].widget.attrs['placeholder'] = 'Nombre del Proyecto'
+        self.fields['name'].widget.attrs['placeholder'] = 'Ingresar nombre del proyecto'
         #self.fields['efforts'].widget.attrs['class'] = 'form-control'
         #self.fields['efforts'].widget.attrs['placeholder'] = 'Efforts'
         #self.fields['status'].widget.attrs['class'] = 'form-control'
@@ -134,7 +134,7 @@ class ProjectRegistrationForm(forms.ModelForm):
         self.fields['plant_type'].widget.attrs['class'] = 'form-control'
         self.fields['plant_type'].widget.attrs['placeholder'] = 'Tipo de cultivo'
         self.fields['num_plants'].widget.attrs['class'] = 'form-control'
-        self.fields['num_plants'].widget.attrs['placeholder'] = 'Cantidad'
+        self.fields['num_plants'].widget.attrs['placeholder'] = 'Número de plantas'
         #self.fields['quality'].widget.attrs['class'] = 'form-control'
         #self.fields['quality'].widget.attrs['placeholder'] = 'Caracteristicas objetivo'
         #self.fields['company'].widget.attrs['class'] = 'form-control'
@@ -142,7 +142,7 @@ class ProjectRegistrationForm(forms.ModelForm):
         #self.fields['complete_per'].widget.attrs['class'] = 'form-control'
         #self.fields['complete_per'].widget.attrs['placeholder'] = 'Completado %'
         self.fields['address'].widget.attrs['class'] = 'form-control'
-        self.fields['address'].widget.attrs['placeholder'] = 'direccion'
+        self.fields['address'].widget.attrs['placeholder'] = 'Ingresar direccion'
         #self.fields['description'].widget.attrs['class'] = 'form-control'
         #self.fields['description'].widget.attrs['placeholder'] = 'Escribe aca la descripcion de esta ronda de cultivo...'
         #self.fields['assign'].widget.attrs['class'] = 'form-control'
