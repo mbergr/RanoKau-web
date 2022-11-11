@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Avg
 from register.models import Project
 from .models import Project as project
 from projects.models import Task
+from projects.forms import *
+from django import forms
 from projects.forms import TaskRegistrationForm
 from projects.forms import ProjectRegistrationForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import folium
 import geocoder
 
@@ -44,6 +46,9 @@ def newTask(request):
         }
         return render(request,'projects/new_task.html', context)
 
+
+
+
 def newProject(request):
     created = False
     if request.method == 'POST':
@@ -52,21 +57,36 @@ def newProject(request):
         # context = {'form': form
         #            }
         if form.is_valid():
+            print(form.cleaned_data)
+            print(form.cleaned_data['assign'].values_list('username', flat=True))
+            form_dict={k: form.cleaned_data[k] for k in ('name', 'plant_type', 'num_plants', 'area', 'address')}
+            request.session['form'] = form_dict
+
             form.save()
             created = True
             form = ProjectRegistrationForm()
-            # context = {
-            #     'created': created,
-            #     'form': form,
-            # }
+            """
+            context = {
+                 'created': created,
+                 'form': form,
+             }
+            
             print("request.method == 'POST'")
-            #return render(request, 'projects/new_project.html', context)
+            
+            
+            request.session['first_form'] = form.cleaned_data
+            
+            """
+            #return redirect('confirmation_new_project.html')
+            
+            return HttpResponseRedirect('/projects/confirmation-new-project')
+            #return render(request, 'projects/confirmation_new_project.html')
         else:
 
-            print('segundo else')
+            print('punto 2')
             #return render(request, 'projects/new_project.html', context)
     else:
-        print('primer else')
+        print('punto 1')
         form = ProjectRegistrationForm()
 
     last_project=Project.objects.all().first()
@@ -77,7 +97,7 @@ def newProject(request):
     else:
         address = last_project.get_address()
 
-    print(address)
+    #print(address)
 
     location = geocoder.osm(address)
 
@@ -103,7 +123,7 @@ def newProject(request):
             'address': address,
         }
     return render(request,'projects/new_project.html', context)
-
+    
 
 
 # def index(request):
@@ -135,3 +155,47 @@ def newProject(request):
 #         'form': form,
 #     }
 #     return render(request, 'index.html', context)
+
+
+# Create your views here.
+def confirmation_newproject(request):
+    form_dict = request.session['form']
+    
+    """
+    form = ProjectRegistrationForm(request.POST)
+    if form.is_valid():
+    
+        
+        return render(request, 'projects/confirmation_new_project.html',context)
+    """
+    address=form_dict['address']
+
+    plant_type_dict={'1':'Albaca', '2':'Lechuga'}
+    form_dict['plant_type']=plant_type_dict[form_dict['plant_type']]
+    print(address)
+    location = geocoder.osm(address)
+
+    lat = location.lat
+    lng = location.lng
+    country = location.country
+    
+    if lat == None or lng == None:
+        #address.delete()
+        return HttpResponse('You address input is invalid')
+    
+    # Create Map Object
+    m = folium.Map(location=[lat, lng], zoom_start=20)
+
+    folium.Marker([lat, lng], tooltip='Ver dirección',
+                      popup=address).add_to(m)
+    # Get HTML Representation of Map Object
+    m = m._repr_html_()
+    
+    context = {
+                'form_dict': form_dict,
+                'm': m
+            }
+    #return render(request,'projects/new_project.html', context)
+    
+    
+    return render(request, 'projects/confirmation_new_project.html', context)
