@@ -205,3 +205,46 @@ def map(request):
         'forma': form,
     }
     return render(request, 'projects/new_project.html', context)
+
+    # Create your views here.
+def confirmation_newproject(request):
+    form_dict = request.session['form']
+
+    """
+    form = ProjectRegistrationForm(request.POST)
+    if form.is_valid():
+    
+        
+        return render(request, 'projects/confirmation_new_project.html',context)
+    """
+    address=form_dict['address']
+
+    plant_type_dict={'1':'Albaca', '2':'Lechuga'}
+    form_dict['plant_type']=plant_type_dict[form_dict['plant_type']]
+    print(address)
+    location = geocoder.osm(address)
+
+    lat = location.lat
+    lng = location.lng
+    country = location.country
+
+    if lat == None or lng == None:
+        #address.delete()
+        return HttpResponse('You address input is invalid')
+
+    # Create Map Object
+    m = folium.Map(location=[lat, lng], zoom_start=20)
+
+    folium.Marker([lat, lng], tooltip='Ver dirección',
+                      popup=address).add_to(m)
+    # Get HTML Representation of Map Object
+    m = m._repr_html_()
+
+    context = {
+                'form_dict': form_dict,
+                'm': m
+            }
+    #return render(request,'projects/new_project.html', context)
+
+
+    return render(request, 'projects/confirmation_new_project.html', context)
