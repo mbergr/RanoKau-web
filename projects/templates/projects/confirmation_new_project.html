@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block breadcrumb %}
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">Projects</li>
+        <li class="breadcrumb-item active">New Project</li>
+{% endblock breadcrumb%}
+
+
+
+
+
+{% block content %}
+<div class="container animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card-group">
+                    <div class="card p-4 mb-5">
+                        <div class="card-body">
+                            {% if created %}
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  Felicitaciones, tu proyecto fue creado!
+                              </div>
+                            {% endif %}
+                                {% csrf_token %}
+                                <h1 style = "font-size:50px">Rano Project</h1>
+                                <p class="text-muted" style = "font-size:25px">¡Este es tu proyecto!</p>
+                                
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="col-form-label"><h5>Nombre del Proyecto: &emsp; {{ form_dict.name }}</h5></label>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label"><h5>Tipo de Cultivo:&emsp; {{ form_dict.plant_type }}</h5></label>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label"><h5>Numero de Plantas:&emsp; {{ form_dict.num_plants }}</h5></label>
+                                    
+                                
+                                </div>
+                                    <div class="form-group">
+                                    <label class="col-form-label"><h5>Superficie de Cultivo (m2):&emsp; {{ form_dict.area }}</h5></label>
+                                    
+                                </div>
+                       <div class="form-group">
+                                    <label class="col-form-label"><h5>Participantes:&emsp; --</h5></label>
+                                    
+                        </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <label class="col-form-label"><h5>Ubicacion:&emsp; {{ form_dict.address }}</h5></label>
+                                    
+
+                                    
+                                    <div  id= "mapa">
+                                   <div class="container">
+                                        <div class="row mt-4">
+                                            <div class="col-md-10 offset-md-1">
+                                                {{ m|safe }}
+                                            </div>
+                                        </div>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label"> <h5>Rano Devices</h5></label><br>
+                                           <input type="checkbox" id="device1" name="Rano Scanner" value="Rano Scanner">
+                                            <label for="device1"> Rano Scanner </label><br>
+                                           <input type="checkbox" id="device2" name="Rack Client" value="Rack Client">
+                                            <label for="device2"> Rack Client </label><br>
+                                           <input type="checkbox" id="device3" name="Environment Client" value="Environment Client">
+                                            <label for="device3"> Environment Client </label><br><br>
+                                </div>
+                                <!--
+                                <table>
+                                    <tr>
+                                      <td>Nombre del Proyecto: </td>
+                                      <td></td>
+                                      <td>{{ form_dict.name }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Tipo de Planta</td>
+                                      <td>{{ form_dict.plant_type }}</td>
+                                    </tr>
+                                  </table>
+                                  -->
+                                <div class="">
+                                    <a class="btn btn-primary btn-lg" href="{% url 'core:index' %}" role="button">Volver al Inicio</a>
+                                </div>
+                            </form>
+                            {{ form.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

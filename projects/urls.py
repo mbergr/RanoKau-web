@@ -11,4 +11,5 @@ urlpatterns = [
     #path('map/', views.map, name='map'),
     path('new-task/', views.newTask, name='new-task'),
     path('projects/', views.projects, name='new-task'),
+    path('confirmation-new-project/', views.confirmation_newproject, name='confirmation-new-project')
 ]
