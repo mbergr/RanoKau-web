@@ -1,0 +1,17 @@
+<div class="card" style="">
+    <div class="card-header">
+        {{ sensor.name }}
+    </div>
+    <div class="card-body">
+        <p class="sensor-measure text-center"><i class="bi bi-cloud"></i></p>
+        <p class="sensor-measure text-center">
+            {% if sensor.last_data and sensor.last_data.pressure %}
+                {{ sensor.last_data.pressure|floatformat:1 }} hPa
+            {% else %}
+                -
+            {% endif %}
+        </p>
+
+        <a href="{% url 'sensor_detail' sensor.slug %}" class="btn btn-primary btn-block">View data</a>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+        {{ sensor.name }}
+    </div>
+    <div class="card-body">
+        <p class="sensor-measure text-center">
+            <i class="bi bi-thermometer-half"></i>
+            {% if sensor.last_data and sensor.last_data.temperature %}
+                {{ sensor.last_data.temperature }} ºC
+            {% else %}
+                -
+            {% endif %}
+        </p>
+
+        <p class="sensor-measure text-center">
+            <i class="bi bi-droplet-half"></i>
+            {% if sensor.last_data and sensor.last_data.humidity %}
+                {{ sensor.last_data.humidity }} %
+            {% else %}
+                -
+            {% endif %}
+        </p>
+        <a href="{% url 'sensor_detail' sensor.slug %}" class="btn btn-primary btn-block">View data</a>
+    </div>
+</div>

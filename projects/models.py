@@ -4,11 +4,10 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 #from jsonfield import JSONField
 
-
 status = (
-    ('1', 'Stuck'),
-    ('2', 'Working'),
-    ('3', 'Done'),
+    ('1', 'Estancado'),
+    ('2', 'En proceso'),
+    ('3', 'Finalizado'),
 )
 
 due = (
@@ -23,7 +22,7 @@ class Project(models.Model):
     slug = models.SlugField('shortcut', blank=True)
     assign = models.ManyToManyField(User)
     #efforts = models.DurationField()
-    #status = models.CharField(max_length=7, choices=status, default=1)
+    status = models.CharField(max_length=7, choices=status, default=1)
     #dead_line = models.DateField()
     plant_type= models.CharField(max_length=80)
     num_plants= models.CharField(max_length=80)
@@ -38,8 +37,8 @@ class Project(models.Model):
     # lat = models.FloatField(default=80)
     # locationpoly = models.MultiPolygonField()
     # quality= JSONField()
-    # company = models.ForeignKey('register.Company', on_delete=models.CASCADE)
-    # complete_per = models.FloatField(max_length=2, validators = [MinValueValidator(0), MaxValueValidator(100)])
+    company = models.ForeignKey('register.Company', on_delete=models.CASCADE, null=True,default=0)
+    complete_per = models.FloatField(default=0,max_length=2, validators = [MinValueValidator(0), MaxValueValidator(100)])
     address = models.CharField(max_length=200, null=True)
     #description = models.TextField(blank=True)
 
@@ -59,7 +58,7 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     assign = models.ManyToManyField(User)
     task_name = models.CharField(max_length=80)
-    #status = models.CharField(max_length=7, choices=status, default=1)
+    status = models.CharField(max_length=7, choices=status, default=1)
     due = models.CharField(max_length=7, choices=due, default=1)
 
     class Meta:

@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block content %}
-
-
-
 <div class="container-fluid">
   <div id="ui-view" style="opacity: 1;"><div class="animated fadeIn">
     <div class="row">
@@ -23,13 +20,14 @@
       <div class="card-body">
         <div class="jumbotron bg-white">
           <img src="{% static 'core/img/logos/rano_horizontal.jpeg' %}" alt="" class="brand-gui ml-2 d-none d-sm-block p-2" style="width:30%;height:100%;">
-          <h1 class="display-4">Bienvenido a RanoKau Agrotech!</h1>
+          <h2 class="display-4">Bienvenido a RanoKau Agrotech!</h2>
           <p class="lead">Crea un proyecto para comenzar.</p>
           <hr class="my-4">
           <!--<p>Registra tu proyecto/empresa para comenzar</p>-->
           <p class="lead">
             <a class="btn btn-primary btn-lg" href="{% url 'projects:new-project' %}" role="button">Registra tu proyecto!</a>
           </p>
+          {% include 'projects/tipo_projectos/projects_summary.html' %}
           <!--
           {% if not user.is_authenticated %}
           <a href="{% url 'core:login' %}">Login</a>
@@ -43,5 +41,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
