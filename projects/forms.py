@@ -84,6 +84,7 @@ class ProjectRegistrationForm(forms.ModelForm):
     plant_type= forms.ChoiceField(choices=plant_type)
     num_plants=forms.IntegerField(min_value=0 , max_value=1000)
     address = forms.CharField(max_length=150,label='address')
+    area = forms.IntegerField()
     #quality = forms.JSONField()
     #dead_line = forms.DateField()
     #company = forms.ModelChoiceField(queryset=Company.objects.all())
@@ -92,7 +93,8 @@ class ProjectRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ['name', 'assign', 'plant_type', 'num_plants','address', 'area']
         #fields = ['address', ]
 
 
@@ -105,6 +107,7 @@ class ProjectRegistrationForm(forms.ModelForm):
         #Project.company = self.cleaned_data['company']
         Project.plant_type = self.cleaned_data['plant_type']
         Project.num_plants = self.cleaned_data['num_plants']
+        Project.area = self.cleaned_data['area']
         #Project.quality = self.cleaned_data['quality']
         #Project.complete_per = self.cleaned_data['complete_per']
         #Project.description = self.cleaned_data['description']
@@ -143,6 +146,8 @@ class ProjectRegistrationForm(forms.ModelForm):
         #self.fields['complete_per'].widget.attrs['placeholder'] = 'Completado %'
         self.fields['address'].widget.attrs['class'] = 'form-control'
         self.fields['address'].widget.attrs['placeholder'] = 'direccion'
+        self.fields['area'].widget.attrs['class'] = 'form-control'
+        self.fields['area'].widget.attrs['placeholder'] = 'area'
         #self.fields['description'].widget.attrs['class'] = 'form-control'
         #self.fields['description'].widget.attrs['placeholder'] = 'Escribe aca la descripcion de esta ronda de cultivo...'
         #self.fields['assign'].widget.attrs['class'] = 'form-control'

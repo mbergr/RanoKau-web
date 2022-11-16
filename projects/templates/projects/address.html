@@ -1,0 +1,16 @@
+                        <div class="form-group">
+                                    <label class="col-form-label">Ubicacion</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                            </div>
+                                        {{form.address}}
+                                          {% if form.address.errors %}
+                                            <ol>
+                                            {% for error in form.address.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                        </div>
+                            </div>

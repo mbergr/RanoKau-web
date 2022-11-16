@@ -1,0 +1,26 @@
+                        <div class="form-group">
+                                    <label class="col-form-label">Ubicacion</label>
+                                    <form class="form-inline my-2 my-lg-0" method="POST">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-map"></i></span>
+                                            </div>
+                                        {{form.address}}
+                                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0 mx-0" onclick="location.href={% url 'projects:map'%}">Buscar</button>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row mt-4">
+                                                <div class="col-md-10 offset-md-1">
+                                                    {{ m|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                            </div>
+
+
+
+<!--<button  class="btn btn-outline-success my-2 my-sm-0 mx-0" type="button" onclick=myFunction("{{address}}")>Buscar</button><br>-->
+
+

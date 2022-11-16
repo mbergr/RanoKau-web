@@ -38,7 +38,6 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
-
                                         {{ form.name }}
                                         {% if form.name.errors %}
                                             <ol>
@@ -81,7 +80,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                    <div class="form-group">
+                                <div class="form-group">
                                     <label class="col-form-label">Superficie de Cultivo (m2)</label>
                                     <div class="input-group">
                                         <div class="input-group-append">
@@ -97,7 +96,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                       <div class="form-group">
+                                <div class="form-group">
                                     <label class="col-form-label">Asigna los participantes del proyecto. <i>Crtl+click for multiple selection</i></label>
                                     <div class="input-group">
                                         <div class="input-group-append">
@@ -112,15 +111,14 @@
                                             </ol>
                                         {% endif %}
                                     </div>
-                        </div>
-                                
-                                <div class="form-group">
-                                    
-                                    <label class="col-form-label">Ubicacion</label>
-                                    <div class="input-group">
+                                </div>
+                                {% include 'projects/address.html' %}
+                                    <!--<div class="input-group">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-map"></i></span>
+
                                         </div>
+
                                         {{form.address}}
                                         {% if form.address.errors %}
                                             <ol>
@@ -129,11 +127,15 @@
                                             {% endfor %}
                                             </ol>
                                         {% endif %}
-                                        <!--
+                                        </div>
+
+                                    </div>
+
                                         <button class="btn btn-outline-success my-2 my-sm-0 mx-0" type="submit">Buscar</button>
-                                        </li>-->
+                                        </li>
                                         <button  class="btn btn-outline-success my-2 my-sm-0 mx-0" type="button" onclick=myFunction("{{address}}")>Buscar</button><br>
                                         <p id="demo"></p>
+
 
                                     </div>
                                     <div  id= "mapa">
@@ -146,6 +148,8 @@
                                        </div>
                                     </div>
                                 </div>
+
+                                </div>-->
                                 <div class="form-group">
                                     <label class="col-form-label"> Rano Devices</label><br>
                                            <input type="checkbox" id="device1" name="Rano Scanner" value="Rano Scanner">
@@ -157,6 +161,7 @@
                                 </div>
                                 <div class="">
                                     <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Registrar</button>
+                                    <!--<button type="submit" class="btn btn-sm btn-success" onclick="location.href={% url 'projects:new-project'%}"><i class="fa fa-dot-circle-o"></i>Registrar</button>-->
                                     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Resetear</button>
                                 </div>
                             </form>
@@ -167,12 +172,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function myFunction(value) {
-      document.getElementById("demo").innerHTML = value;
-   }
-</script>
-
 {% endblock %}
